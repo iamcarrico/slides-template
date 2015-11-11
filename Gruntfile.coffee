@@ -2,6 +2,7 @@
 module.exports = (grunt) ->
 
     grunt.initConfig
+        pkg: grunt.file.readJSON 'package.json'
 
         watch:
 
@@ -31,7 +32,7 @@ module.exports = (grunt) ->
             jshint:
                 files: ['js/*.js']
                 tasks: ['jshint']
-        
+
             sass:
                 files: ['css/source/theme.scss']
                 tasks: ['sass']
@@ -41,7 +42,7 @@ module.exports = (grunt) ->
             theme:
                 files:
                     'css/theme.css': 'css/source/theme.scss'
-        
+
         connect:
 
             livereload:
@@ -91,7 +92,7 @@ module.exports = (grunt) ->
                     filter: 'isFile'
                 }]
 
-        
+
         buildcontrol:
 
             options:
@@ -101,9 +102,9 @@ module.exports = (grunt) ->
                 message: 'Built from %sourceCommit% on branch %sourceBranch%'
             pages:
                 options:
-                    remote: 'git@github.com:iamcarrico/slides-template.git'
+                    remote: '<%= pkg.repository.url %>'
                     branch: 'gh-pages'
-        
+
 
 
     # Load all grunt tasks.
@@ -119,6 +120,8 @@ module.exports = (grunt) ->
             html = grunt.template.process indexTemplate, data:
                 slides:
                     slides
+                pkg:
+                    grunt.file.readJSON 'package.json'
                 section: (slide) ->
                     grunt.template.process sectionTemplate, data:
                         slide:
@@ -147,13 +150,13 @@ module.exports = (grunt) ->
             'copy'
         ]
 
-    
+
     grunt.registerTask 'deploy',
         'Deploy to Github Pages', [
             'dist'
             'buildcontrol'
         ]
-    
+
 
     # Define default task.
     grunt.registerTask 'default', [

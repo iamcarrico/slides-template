@@ -20,5 +20,20 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iamcarrico/slides-template.git"
+  },
+  "homepage": "https://github.com/iamcarrico/slides-template",
+  "author": {
+    "name": "Ian Carrico",
+    "email": "github@iancarrico.com",
+    "url": "https://github.com/iamcarrico"
+  },
+  "license": "MIT",
+  "configuration": {
+    "title": "Slides template",
+    "hashtag": "#hashtag"
   }
 }
